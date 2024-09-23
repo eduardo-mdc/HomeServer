@@ -33,6 +33,10 @@ else
   echo "Latest snapshot is not older than one week. Will not create new snapshots."
 fi
 
+# Sleep for 10 seconds
+sleep 10
+
+
 # Step 3: Open VPN connection
 echo "Opening VPN connection..."
 sudo wg-quick up $VPN_CONFIG
@@ -49,7 +53,7 @@ fi
 
 # Step 5: Upload to remote $REMOTE_IP with rsync and show progress
 echo "Uploading snapshots to remote server..."
-rsync -av --progress /timeshift/snapshots/ $REMOTE_USER@$REMOTE_IP:$REMOTE_SNAPSHOTS_PATH
+sudo rsync -av --progress /timeshift/snapshots/ $REMOTE_USER@$REMOTE_IP:$REMOTE_SNAPSHOTS_PATH
 
 # Step 6: Close VPN connection
 echo "Closing VPN connection..."
